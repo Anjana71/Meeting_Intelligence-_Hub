@@ -1,0 +1,12 @@
+google-genai
+google-api-core
+fastapi
+uvicorn
+python-dotenv
+python-multipart
+pydantic
+requests
+sqlalchemy
+python-jose[cryptography]
+passlib[bcrypt]
+bcrypt==4.0.1

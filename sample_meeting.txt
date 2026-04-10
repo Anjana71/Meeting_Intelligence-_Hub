@@ -1,0 +1,7 @@
+Speaker 1: Hi everyone, thanks for joining. Let's discuss the upcoming Q3 API launch.
+Speaker 2: I've reviewed the current API schema, and I think we need to Go ahead with the new API schema before we launch. The old one won't scale.
+Speaker 1: Good point. John, can you Update the database credentials to match the new schema?
+John: Yes, I can do that by Next Tuesday.
+Speaker 2: Perfect. One more thing, I have some concerns about the budget. Let's Schedule a follow-up about the budget. 
+Sarah: I agree, I'll set that up for Tomorrow.
+Speaker 1: Thanks all, feeling very positive about this direction! We'll reconvene soon.

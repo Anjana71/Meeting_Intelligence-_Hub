@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meeting Intelligence Hub | Premium AI Analytics</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Authentication Overlay -->
+    <div id="auth-overlay">
+        <div class="card auth-card">
+            <div id="login-form">
+                <div class="logo" style="justify-content: center; margin-bottom: 2rem;">
+                    <i class="fa-solid fa-brain-circuit"></i>
+                    <span>Meeting Hub</span>
+                </div>
+                <h2>Welcome Back</h2>
+                <p>Sign in to access your meeting intelligence.</p>
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="login-username" placeholder="Enter your username">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="login-password" placeholder="••••••••">
+                </div>
+                <button class="btn primary-btn" style="width: 100%;" id="btn-login-submit">Sign In</button>
+                <div class="auth-switch">Don't have an account? <span id="switch-to-register">Register</span></div>
+            </div>
+
+            <div id="register-form" style="display: none;">
+                <h2>Create Account</h2>
+                <p>Start centralizing your meeting knowledge.</p>
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="reg-fullname" placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="reg-username" placeholder="johndoe">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="reg-password" placeholder="••••••••">
+                </div>
+                <button class="btn primary-btn" style="width: 100%;" id="btn-register-submit">Create Account</button>
+                <div class="auth-switch">Already have an account? <span id="switch-to-login">Sign In</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="app-container" style="display: none;">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fa-solid fa-brain-circuit"></i>
+                <span>Meeting Hub</span>
+            </div>
+            
+            <nav style="position: relative;">
+                <div class="nav-marker" id="nav-marker"></div>
+                <ul class="nav-links">
+                    <li class="active" data-view="dashboard-view" id="nav-dashboard">
+                        <i class="fa-solid fa-chart-pie"></i>
+                        Dashboard
+                    </li>
+                    <li data-view="upload-view" id="nav-upload">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        Upload Portal
+                    </li>
+                </ul>
+            </nav>
+
+            <ul class="nav-links" style="margin-top: auto;">
+                <li id="logout-btn">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Sign Out
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <h1 id="view-title" style="display: none;">Meeting Intelligence</h1>
+                </div>
+                <div class="user-profile">
+                    <span id="user-display-name" style="font-weight: 500; color: var(--text-muted);">...</span>
+                    <div class="avatar" id="user-initials">AG</div>
+                </div>
+            </header>
+
+            <!-- Views -->
+            <section id="dashboard-view" class="view active-view">
+                <div class="welcome-hero">
+                    <h1>Good Day, <span id="hero-user-name">User</span>!</h1>
+                    <p>Here’s the latest from your meeting intelligence hub.</p>
+                </div>
+
+                <div class="stats-row">
+                    <div class="card stat-card">
+                        <div class="stat-icon"><i class="fa-solid fa-video"></i></div>
+                        <div class="stat-info">
+                            <h3>Total Meetings</h3>
+                            <p id="total-meetings-count">0</p>
+                        </div>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-icon"><i class="fa-solid fa-check-double"></i></div>
+                        <div class="stat-info">
+                            <h3>Action Items</h3>
+                            <p id="total-actions-count">0</p>
+                        </div>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-icon"><i class="fa-solid fa-face-smile"></i></div>
+                        <div class="stat-info">
+                            <h3>Avg Sentiment</h3>
+                            <p id="avg-sentiment-val">0.0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header" style="margin-bottom: 2rem;">
+                        <h3><i class="fa-solid fa-list-ul"></i> Recent Transcripts</h3>
+                    </div>
+                    <div id="meetings-list-container">
+                        <!-- Empty states or cards populated here -->
+                    </div>
+                </div>
+            </section>
+
+            <section id="upload-view" class="view">
+                <div class="upload-portal">
+                    <div class="card">
+                        <h2>Upload Transcripts</h2>
+                        <p class="subtitle" style="margin-bottom: 2.5rem; color: var(--text-muted);">Drag & drop your .vtt or .txt files for AI analysis.</p>
+                        
+                        <div id="drop-zone" class="card" style="padding: 4rem; text-align: center; cursor: pointer; border: 2px dashed rgba(255,255,255,0.1); background: rgba(255,255,255,0.02);">
+                            <i class="fa-solid fa-file-arrow-up" style="font-size: 3rem; color: var(--primary); margin-bottom: 1.5rem;"></i>
+                            <h3>Select Files</h3>
+                            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">or drag and drop them here</p>
+                            <input type="file" id="file-input" multiple accept=".vtt,.txt" style="display: none;">
+                            <button class="btn primary-btn">Browse Files</button>
+                        </div>
+
+                        <div id="upload-progress-container" class="upload-progress" style="display: none; margin-top: 2rem;">
+                            <div class="progress-bar-container" style="height: 6px; background: rgba(255,255,255,0.05); border-radius: 10px; overflow: hidden; margin-bottom: 1rem;">
+                                <div id="upload-progress-bar" class="progress-bar" style="height: 100%; width: 0%; background: var(--primary); box-shadow: 0 0 10px var(--primary-glow); transition: width 0.3s;"></div>
+                            </div>
+                            <p id="upload-status-text" style="font-size: 0.9rem; color: var(--text-muted); text-align: center;">Processing...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="detail-view" class="view">
+                <div class="meeting-header" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 3rem;">
+                    <div style="display: flex; align-items: center; gap: 1.5rem;">
+                        <button id="back-to-dashboard" style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-glass); color: var(--text-main); padding: 0.6rem 1rem; border-radius: 12px; cursor: pointer;">
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </button>
+                        <h2 id="meeting-title-display">Meeting Analytics</h2>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid" style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem;">
+                    <div class="dashboard-main" style="display: flex; flex-direction: column; gap: 2rem;">
+                        <div class="card">
+                            <div class="card-header" style="margin-bottom: 1.5rem;">
+                                <h3 style="display: flex; align-items: center; gap: 0.75rem;"><i class="fa-solid fa-bolt" style="color: var(--primary);"></i> Action Items & Decisions</h3>
+                            </div>
+                            <div class="table-container">
+                                <table style="width: 100%; border-collapse: collapse;">
+                                    <thead>
+                                        <tr style="text-align: left; opacity: 0.6; font-size: 0.8rem;">
+                                            <th style="padding: 1rem 0;">TYPE</th>
+                                            <th>ITEM</th>
+                                            <th>OWNER</th>
+                                            <th>DEADLINE</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="action-items-table"></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header" style="margin-bottom: 1.5rem;">
+                                <h3 style="display: flex; align-items: center; gap: 0.75rem;"><i class="fa-solid fa-chart-line" style="color: var(--secondary);"></i> Sentiment Journey</h3>
+                            </div>
+                            <div class="timeline" id="sentiment-timeline-viz" style="display: flex; height: 12px; border-radius: 6px; overflow: hidden; margin-bottom: 2rem; background: rgba(0,0,0,0.2);"></div>
+                            <div class="speaker-sentiment" id="speaker-positivity-list" style="display: flex; flex-direction: column; gap: 1rem;"></div>
+                        </div>
+                    </div>
+
+                    <aside class="dashboard-side">
+                        <div class="card chat-panel" style="height: 100%; display: flex; flex-direction: column; padding: 1.5rem;">
+                            <div class="card-header" style="margin-bottom: 1.5rem;">
+                                <h3 style="display: flex; align-items: center; gap: 0.75rem;"><i class="fa-solid fa-comment-dots" style="color: var(--primary);"></i> Contextual AI</h3>
+                            </div>
+                            <div class="chat-history" id="chat-messages" style="flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.5rem; padding-right: 0.5rem;">
+                            </div>
+                            <div class="chat-input-area" style="position: relative;">
+                                <input type="text" id="chat-input" placeholder="Ask about this meeting..." style="width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--border-glass); padding: 1rem 3.5rem 1rem 1.25rem; border-radius: 14px; color: var(--text-main);">
+                                <button id="btn-chat-send" style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; border-radius: 10px; border: none; background: var(--primary); color: white; cursor: pointer;"><i class="fa-solid fa-paper-plane"></i></button>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/auth.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
