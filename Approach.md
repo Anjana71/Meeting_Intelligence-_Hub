@@ -1,7 +1,5 @@
 # Approach Document: Meeting Intelligence Hub
 
-**Submitted for:** 2-Week AI Sprint (April 2026)  
-**Developer:** AI Sprint Participant  
 
 ---
 
